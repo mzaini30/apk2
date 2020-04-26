@@ -1,0 +1,25 @@
+doctype html
+html
+  head
+    title Suka Baca
+    meta(charset="utf-8")
+    meta(name="viewport" content="width=device-width, initial-scale=1")
+    link(rel="stylesheet" href="vendor/bootstrap/css/bootstrap.min.css")
+    style
+      include:stylus css/base.stylus
+  body
+    .container
+      block isi
+    .navbar.navbar-default.navbar-fixed-bottom
+      .container
+        table.table.table-bordered
+          tbody
+            tr  
+              td: a.btn.btn-default(href="index.html") Beranda
+              td: a.btn.btn-default(href="tambah.html") Tambah
+    script(src="vendor/jquery/jquery.min.js")
+    script(src="vendor/dexie.min.js")
+    script(src="vendor/sweetalert2.all.min.js")
+    script
+      include:coffee-script(bare=true) js/base.coffee
+      block js

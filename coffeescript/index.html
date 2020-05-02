@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <link rel="stylesheet" href="vendor/bootstrap/css/bootstrap.min.css">
+    <title>Coffeescript</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <style>* {
+  word-wrap: break-word;
+}
+table {
+  height: 100vh;
+  padding: 0 !important;
+  margin: 0 !important;
+}
+td {
+  padding: 0 !important;
+}
+textarea.form-control {
+  height: 100vh;
+}
+textarea.form-control.output,
+textarea.form-control.console {
+  height: 50vh;
+}
+
+    </style>
+  </head>
+  <body>
+    <table class="table table-bordered">
+      <tbody>
+        <tr>
+          <td>
+            <textarea class="input form-control" placeholder="Tulis Coffeescript di sini"></textarea>
+          </td>
+          <td>
+            <textarea class="output form-control" readonly></textarea>
+            <textarea class="console form-control" readonly></textarea>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+    <script src="vendor/jquery/jquery.min.js"></script>
+    <script src="vendor/coffee/coffee-script.js"></script>
+    <script>
+       $(".input").on("keyup", function() {
+  var hasil12345, x;
+  try {
+    $(".output").val(CoffeeScript.compile($(this).val(), {
+      bare: true
+    }));
+    hasil12345 = [];
+    console.log = function(x) {
+      if (typeof x === "object") {
+        return hasil12345.push(JSON.stringify(x));
+      } else {
+        return hasil12345.push(x);
+      }
+    };
+    eval(CoffeeScript.compile($(this).val(), {
+      bare: true
+    }));
+    return $(".console").val(hasil12345.join("\n"));
+  } catch (error) {
+    x = error;
+    $(".console").val(x);
+    return $(".output").val("");
+  }
+});
+
+    </script>
+  </body>
+</html>
